@@ -24,13 +24,9 @@ namespace :db do
   end
   desc "Export database contents"
   task :export do
-    export_db( $database_filename )
+    system("sqlite3 #{$database_filename} .dump > #{$database_export_filename}")
   end
 
-end
-
-def export_db( db_filename )
-  
 end
 
 def seed_db( db_filename )
