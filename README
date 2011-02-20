@@ -1,0 +1,12 @@
+== Setup
+rake db:create
+rake db:seed
+ruby crawl.rb
+
+== Data
+Data is stored in a local sqlite database, which can be exported as SQL
+using the command:
+
+rake db:export
+
+The result is stored in the local file "data.sql"
