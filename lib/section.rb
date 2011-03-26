@@ -14,7 +14,7 @@ class Section < ActiveRecord::Base
       return
     end
 
-    puts "Crawling#{url}"
+    puts "Crawling #{url}"
     html = doc.to_html.gsub(/<\/?[^>]*>/, " ")
 
     # initialize section by section key
