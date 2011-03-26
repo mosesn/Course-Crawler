@@ -61,7 +61,7 @@ class Section < ActiveRecord::Base
       start_time = Time.parse( match[2].strip )
       end_time = Time.parse( match[3].strip )
 
-      section.day = match[1].strips
+      section.days = match[1].strip
       section.start_time = start_time.localtime.hour + (start_time.localtime.min/60.0)
       section.end_time = end_time.localtime.hour + (end_time.localtime.min/60.0)
 
@@ -82,7 +82,7 @@ class Section < ActiveRecord::Base
     if html =~ /\n\s*Number\s*\n/
       match = html.match( /\n\s*Number\s*\n\s*([A-Z0-9]+)/ )
       course_key = section.subject.abbreviation + match[1]
-      section.course = Course.update_or_create( course_key )
+      section.course = Course.find_or_create_by_course_key( course_key.strip )
     end
 
     section.save!

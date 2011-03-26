@@ -1,14 +1,11 @@
 class Course < ActiveRecord::Base
   has_many :sections
 
-  def self.update_or_create( course_key )
+  def update
     require 'open-uri'
     error_message = "I'm sorry. At the moment, there are no courses that correspond to your search criteria."
 
-    course = Course.find_or_create_by_course_key( course_key.strip )
-    return course if Time.now-course.updated_at < 12.hours and !course.title.nil?
-
-    puts course_key + ": loading course data"
+    return if Time.now-self.updated_at < 12.hours and !self.title.nil?
     
     url = "http://www.college.columbia.edu/unify/getApi/bulletinSearch.php?courseIdentifierVar=" + course_key
     doc = nil
@@ -25,10 +22,8 @@ class Course < ActiveRecord::Base
       end
     end
 
-    if doc.to_html.match( error_message ) or doc.nil?
-      course.destroy
-      return nil
-    end
+    # give up if no html file found for course
+    return if doc.to_html.match( error_message ) or doc.nil?
 
     brief = ""
     if school == 'CC'or school == 'GSAS'
@@ -44,23 +39,21 @@ class Course < ActiveRecord::Base
 
     # title
     match = brief.gsub( /<\/?strong>/, '#' ).match( /#([^#]+)/ )
-    course.title = match[1].gsub( /<\/?[^>]*>/, " " ).gsub( /([A-Z]{2,4}\s+)?[A-Z]\s?[0-9]+([xy]+)?(\sand\sy|\sor\sy)?-?(\s*\*\s*)?\.?/, "" ).gsub( /\s+/, " " ).strip
-    course.title.gsub!( /\s*\(\s*(S|s)ection\s*[0-9]+\s*\)\s*/, '' )
-    course.title.gsub!( /\..*/, '' )
+    self.title = match[1].gsub( /<\/?[^>]*>/, " " ).gsub( /([A-Z]{2,4}\s+)?[A-Z]\s?[0-9]+([xy]+)?(\sand\sy|\sor\sy)?-?(\s*\*\s*)?\.?/, "" ).gsub( /\s+/, " " ).strip
+    self.title.gsub!( /\s*\(\s*(S|s)ection\s*[0-9]+\s*\)\s*/, '' )
+    self.title.gsub!( /\..*/, '' )
     
     # description
     match = brief.match( /<\/strong>\s*(<em>\s*[0-9.]+\s*pts\.[^<]*<\/em>)?\s*(.*)$/ )
-    course.description = match[2].gsub(/<\/?[^>]*>/, " ").gsub( /\s+/, " " ).strip
+    self.description = match[2].gsub(/<\/?[^>]*>/, " ").gsub( /\s+/, " " ).strip
 
     # points
     match = brief.match( /([0-9.]+)\s*pts\./ )
     match = brief.match( /([0-9.]+)\s*points/ ) if match.nil? 
 
-    course.points = match[1].gsub(/<\/?[^>]*>/, " ").gsub( /\s+/, " " ).strip unless match.nil?
+    self.points = match[1].gsub(/<\/?[^>]*>/, " ").gsub( /\s+/, " " ).strip unless match.nil?
 
-    course.updated_at = Time.now
-    course.save!
-    return course
-
+    self.updated_at = Time.now
+    self.save!
   end
 end
