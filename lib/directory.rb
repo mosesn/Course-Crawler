@@ -3,8 +3,7 @@ class Directory
   def self.crawl
     require 'open-uri'
 
-#    subjects = Subject.order( "id" )
-    subjects = Subject.where( 'id>?', 154 )
+    subjects = Subject.order( "id" )
     num_subjects = subjects.size
     
     start_time = Time.now
