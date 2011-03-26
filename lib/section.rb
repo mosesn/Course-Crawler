@@ -61,6 +61,7 @@ class Section < ActiveRecord::Base
       start_time = Time.parse( match[2].strip )
       end_time = Time.parse( match[3].strip )
 
+      section.day = match[1].strips
       section.start_time = start_time.localtime.hour + (start_time.localtime.min/60.0)
       section.end_time = end_time.localtime.hour + (end_time.localtime.min/60.0)
 
