@@ -6,7 +6,7 @@ class Course < ActiveRecord::Base
     error_message = "I'm sorry. At the moment, there are no courses that correspond to your search criteria."
 
     course = Course.find_or_create_by_course_key( course_key.strip )
-    return course if Time.now-course.updated_at < 12.hours
+    return course if Time.now-course.updated_at < 1.hours and !course.title.nil?
 
     puts course_key + ": loading course data"
     

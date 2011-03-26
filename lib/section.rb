@@ -39,8 +39,8 @@ class Section < ActiveRecord::Base
 
     #meta
     section.url = url
-    section.semester = doc.css('meta[name="semes"]').first.attribute("content")
-    section.description = doc.css('meta[name="description"]').first.attribute("content")
+    section.semester = doc.css('meta[name="semes"]').first.attribute("content").value.strip
+    section.description = doc.css('meta[name="description"]').first.attribute("content").value.strip
     
     instructor_name = doc.css('meta[name="instr"]').first.attribute("content").value.split( ", " )[0]
     section.instructor = Instructor.find_or_create_by_name( instructor_name )

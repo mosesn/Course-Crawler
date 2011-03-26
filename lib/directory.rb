@@ -3,7 +3,8 @@ class Directory
   def self.crawl
     require 'open-uri'
 
-    subjects = Subject.order( "id" )
+#    subjects = Subject.order( "id" )
+    subjects = [Subject.find_by_abbreviation("EAAS")]
     num_subjects = subjects.size
     
     start_time = Time.now

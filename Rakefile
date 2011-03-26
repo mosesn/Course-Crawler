@@ -13,6 +13,7 @@ namespace :db do
   task :create do
     create_db( APP_CONFIG["database_filename"] )
   end
+  
   desc "Drop all tables"
   task :drop do
     case APP_CONFIG["database"]["adapter"]
@@ -22,10 +23,12 @@ namespace :db do
       File.delete( APP_CONFIG["database_filename"] )
     end    
   end
+  
   desc "Seed database with data in ./seeds/"
   task :seed do
     seed_db( APP_CONFIG["database_filename"] )
   end
+  
   desc "Export database contents"
   task :export do
     case APP_CONFIG["database"]["adapter"]
@@ -103,7 +106,7 @@ def create_db( db_filename )
     c = ::ActiveRecord::Base.connection
     c.execute("PRAGMA default_synchronous=OFF")
     c.execute("PRAGMA synchronous=OFF")
-  end  
+  end
   
   require "./db/schema"
 end
