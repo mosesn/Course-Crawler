@@ -15,8 +15,9 @@ SQLite3 or MySQL 5.0>=
 
 == Setup
 
-Decided whether you want to use MySQL or SQLite3
+Copy "config.yaml.default" to "config.yaml"
 
+Decided whether you want to use MySQL or SQLite3
 For SQLite 3:
   -Complete the following fields in config.yaml
 
