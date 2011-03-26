@@ -5,9 +5,9 @@ class Course < ActiveRecord::Base
     require 'open-uri'
     error_message = "I'm sorry. At the moment, there are no courses that correspond to your search criteria."
 
-    course = Course.find_or_create_by_course_key( course_key )
-    return course unless course.title.nil? or course.updated_at < (Time.now-12.hours)
-    
+    course = Course.find_or_create_by_course_key( course_key.strip )
+    return course if Time.now-course.updated_at < 12.hours
+
     puts course_key + ": loading course data"
     
     url = "http://www.college.columbia.edu/unify/getApi/bulletinSearch.php?courseIdentifierVar=" + course_key
@@ -58,6 +58,7 @@ class Course < ActiveRecord::Base
 
     course.points = match[1].gsub(/<\/?[^>]*>/, " ").gsub( /\s+/, " " ).strip unless match.nil?
 
+    course.updated_at = Time.now
     course.save!
     return course
 

@@ -14,6 +14,7 @@ class Section < ActiveRecord::Base
       return
     end
 
+    puts "Crawling#{url}"
     html = doc.to_html.gsub(/<\/?[^>]*>/, " ")
 
     # initialize section by section key
@@ -55,8 +56,7 @@ class Section < ActiveRecord::Base
     end
 
     if html =~ /Day \&amp; Time Location/
-      match = html.match(/Day \&amp; Time Location\s*([A-Za-z]+)\s*([^-]+)-([^\s]+)\s([^\n]+)/)
-      section.days = match[1].strip
+      match = html.match(/Day \&amp; Time Location\s*([A-Za-z]+)\s*([^-]+)-([^\s]+)\s?([^\n]+)?/)
 
       start_time = Time.parse( match[2].strip )
       end_time = Time.parse( match[3].strip )
@@ -64,7 +64,7 @@ class Section < ActiveRecord::Base
       section.start_time = start_time.localtime.hour + (start_time.localtime.min/60.0)
       section.end_time = end_time.localtime.hour + (end_time.localtime.min/60.0)
 
-      if match[4].strip != "To be announced"
+      unless match[4].nil? or match[4].strip == "To be announced"
         match = match[4].strip.match( /([^\s]+)\s*(.+)/ )
         section.room = match[1].strip
         section.building = match[2].strip
