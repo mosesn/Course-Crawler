@@ -4,7 +4,8 @@ class Directory
     require 'open-uri'
         
     # Crawl sections
-    subjects = Subject.order( "id" )
+    #subjects = Subject.order( "id" )
+    subjects = []
     num_subjects = subjects.size
     start_time = Time.now
     sections_crawled = 0
@@ -29,8 +30,7 @@ class Directory
     end
     
     # Crawl courses
-    courses = Course.order( "course_key" )
-    courses.each_with_index do |c, index|
+    Course.all.each_with_index do |c, index|
       puts "(#{index+1} of #{courses.size}) Crawling #{c.course_key}"
       c.update
     end

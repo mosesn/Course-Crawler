@@ -1,0 +1,12 @@
+/Users/ryanbubinski/.rvm/gems/ruby-1.9.2-p180/gems/activerecord-3.0.5/lib/active_record/connection_adapters/abstract_adapter.rb:207:in `rescue in log': Mysql::ProtocolError: invalid packet: sequence number mismatch(109 != 254(expected)): SELECT `courses`.* FROM `courses` (ActiveRecord::StatementInvalid)
+	from /Users/ryanbubinski/.rvm/gems/ruby-1.9.2-p180/gems/activerecord-3.0.5/lib/active_record/connection_adapters/abstract_adapter.rb:199:in `log'
+	from /Users/ryanbubinski/.rvm/gems/ruby-1.9.2-p180/gems/activerecord-3.0.5/lib/active_record/connection_adapters/mysql_adapter.rb:289:in `execute'
+	from /Users/ryanbubinski/.rvm/gems/ruby-1.9.2-p180/gems/activerecord-3.0.5/lib/active_record/connection_adapters/mysql_adapter.rb:619:in `select'
+	from /Users/ryanbubinski/.rvm/gems/ruby-1.9.2-p180/gems/activerecord-3.0.5/lib/active_record/connection_adapters/abstract/database_statements.rb:7:in `select_all'
+	from /Users/ryanbubinski/.rvm/gems/ruby-1.9.2-p180/gems/activerecord-3.0.5/lib/active_record/connection_adapters/abstract/query_cache.rb:56:in `select_all'
+	from /Users/ryanbubinski/.rvm/gems/ruby-1.9.2-p180/gems/activerecord-3.0.5/lib/active_record/base.rb:467:in `find_by_sql'
+	from /Users/ryanbubinski/.rvm/gems/ruby-1.9.2-p180/gems/activerecord-3.0.5/lib/active_record/relation.rb:64:in `to_a'
+	from /Users/ryanbubinski/.rvm/gems/ruby-1.9.2-p180/gems/activerecord-3.0.5/lib/active_record/relation/finder_methods.rb:143:in `all'
+	from /Users/ryanbubinski/.rvm/gems/ruby-1.9.2-p180/gems/activerecord-3.0.5/lib/active_record/base.rb:439:in `all'
+	from /Users/ryanbubinski/Projects/Course-Crawler/lib/directory.rb:33:in `crawl'
+	from crawl.rb:35:in `<main>'

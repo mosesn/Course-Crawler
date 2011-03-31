@@ -17,38 +17,36 @@ SQLite3 or MySQL 5.0>=
 
 Copy "config.yaml.default" to "config.yaml"
 
-Decided whether you want to use MySQL or SQLite3
-For SQLite 3:
-  -Complete the following fields in config.yaml
+Configure a database
+  For SQLite 3:
+    -Complete the following fields in config.yaml
 
-    database:
-      adapter: sqlite3
+      database:
+        adapter: sqlite3
 
-  -Modify Gemfile to look like the following:
-    # database adapter
-    gem 'sqlite3'
-    #gem 'mysql'
+    -Modify Gemfile to look like the following:
+      # database adapter
+      gem 'sqlite3'
+      #gem 'mysql'
 
 
-For MySQL:
-  -Complete the following fields in config.yaml
+  For MySQL:
+    -Complete the following fields in config.yaml
 
-    database:
-      adapter: mysql
-      host: [localhost]
-      username: [db_username]  
-      password: [db_user_passwd]
-      database: [db_name]
-      socket: [db_socket]
+      database:
+        adapter: mysql
+        host: [localhost]
+        username: [db_username]  
+        password: [db_user_passwd]
+        database: [db_name]
+        socket: [db_socket]
   
-  -Modify Gemfile to look like the following:
-    # database adapter
-    #gem 'sqlite3'
-    gem 'mysql'
+    -Modify Gemfile to look like the following:
+      # database adapter
+      #gem 'sqlite3'
+      gem 'mysql'
 
-
-Then run the following commands in the terminal window:
-
+Run the following commands in the terminal window:
   gem install bundler
   bundle install
   rake db:create
