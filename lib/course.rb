@@ -5,7 +5,7 @@ class Course < ActiveRecord::Base
     require 'open-uri'
     error_message = "I'm sorry. At the moment, there are no courses that correspond to your search criteria."
 
-    return if Time.now-self.updated_at < 12.hours and !self.title.nil?
+    return if !self.title.nil?
     
     url = "http://www.college.columbia.edu/unify/getApi/bulletinSearch.php?courseIdentifierVar=" + course_key
     doc = nil
@@ -39,6 +39,7 @@ class Course < ActiveRecord::Base
 
     # title
     match = brief.gsub( /<\/?strong>/, '#' ).match( /#([^#]+)/ )
+
     self.title = match[1].gsub( /<\/?[^>]*>/, " " ).gsub( /([A-Z]{2,4}\s+)?[A-Z]\s?[0-9]+([xy]+)?(\sand\sy|\sor\sy)?-?(\s*\*\s*)?\.?/, "" ).gsub( /\s+/, " " ).strip
     self.title.gsub!( /\s*\(\s*(S|s)ection\s*[0-9]+\s*\)\s*/, '' )
     self.title.gsub!( /\..*/, '' )

@@ -4,7 +4,8 @@ class Directory
     require 'open-uri'
         
     # Crawl sections
-    subjects = Subject.order( "id" )
+    #subjects = Subject.order( "id" )
+    subjects = []
     num_subjects = subjects.size
     start_time = Time.now
     sections_crawled = 0
