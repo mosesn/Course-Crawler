@@ -11,13 +11,27 @@ GEM
       arel (~> 2.0.2)
       tzinfo (~> 0.3.23)
     activesupport (3.0.5)
+    addressable (2.2.4)
     arel (2.0.9)
     builder (2.1.2)
+    data_objects (0.10.3)
+      addressable (~> 2.1)
+    dm-core (1.1.0)
+      addressable (~> 2.2.4)
+    dm-do-adapter (1.1.0)
+      data_objects (~> 0.10.2)
+      dm-core (~> 1.1.0)
+    dm-migrations (1.1.0)
+      dm-core (~> 1.1.0)
+    dm-mysql-adapter (1.1.0)
+      dm-do-adapter (~> 1.1.0)
+      do_mysql (~> 0.10.2)
+    do_mysql (0.10.3)
+      data_objects (= 0.10.3)
     i18n (0.5.0)
-    mysql (2.8.1)
+    mysql2 (0.2.7)
     nokogiri (1.4.4)
     rake (0.8.7)
-    ruby-mysql (2.9.4)
     tzinfo (0.3.25)
 
 PLATFORMS
@@ -25,7 +39,9 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord
-  mysql
+  dm-core
+  dm-migrations
+  dm-mysql-adapter
+  mysql2
   nokogiri (~> 1.4)
   rake
-  ruby-mysql
