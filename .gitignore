@@ -1,6 +1,5 @@
-db/*sqlite3
-Gemfile.lock
 config.yaml
 *~
 data.sql
 nohup.out
+.bundle

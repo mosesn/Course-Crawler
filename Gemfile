@@ -5,6 +5,7 @@ gem 'nokogiri', "~> 1.4"
 gem 'rake'
 
 # database adapter
-# gem 'sqlite3'
-gem 'ruby-mysql'
-gem 'mysql'
+gem 'mysql2'
+gem 'dm-core'
+gem 'dm-migrations'
+gem 'dm-mysql-adapter'
