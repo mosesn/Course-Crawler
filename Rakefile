@@ -60,7 +60,9 @@ def seed_db( db_filename )
         APP_CONFIG["database"]["host"],
         APP_CONFIG["database"]["username"],
         APP_CONFIG["database"]["password"],
-        APP_CONFIG["database"]["database"]    
+        APP_CONFIG["database"]["database"],    
+	APP_CONFIG["database"]["port"],
+	APP_CONFIG["database"]["socket"]
         )
       query = "INSERT INTO #{table_name} (#{column_names.join(', ')}) VALUES \n"
       inserts = []
@@ -94,7 +96,9 @@ def create_db( db_filename )
       :host     => APP_CONFIG["database"]["host"],
       :username => APP_CONFIG["database"]["username"],
       :password => APP_CONFIG["database"]["password"],
-      :database => APP_CONFIG["database"]["database"]
+      :database => APP_CONFIG["database"]["database"],
+      :socket => APP_CONFIG["database"]["socket"],
+      :port => APP_CONFIG["database"]["port"]
     )
   when "sqlite3"
     ActiveRecord::Base.establish_connection(

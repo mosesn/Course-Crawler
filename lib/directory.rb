@@ -29,7 +29,8 @@ class Directory
     end
     
     # Crawl courses
-    Course.all.each_with_index do |c, index|
+    courses = Course.all
+    courses.each_with_index do |c, index|
       puts "(#{index+1} of #{courses.size}) Crawling #{c.course_key}"
       c.update
     end

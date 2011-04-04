@@ -14,7 +14,9 @@ when "mysql"
     :host     => APP_CONFIG["database"]["host"],
     :username => APP_CONFIG["database"]["username"],
     :password => APP_CONFIG["database"]["password"],
-    :database => APP_CONFIG["database"]["database"]
+    :database => APP_CONFIG["database"]["database"],
+    :socket => APP_CONFIG["database"]["socket"],
+    :port => APP_CONFIG["database"]["port"]
   )
 when "sqlite3"
   ActiveRecord::Base.establish_connection(
