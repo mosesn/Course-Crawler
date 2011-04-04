@@ -267,10 +267,8 @@ subjects.each_with_index do |s, index|
 end
 
 # Crawl courses
-=begin
 courses = Course.all
 courses.each_with_index do |c, index|
   puts "(#{index+1} of #{courses.size}) Crawling #{c.course_key}"
   c.update
 end
-=end

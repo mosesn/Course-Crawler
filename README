@@ -26,7 +26,6 @@ Complete the following fields in config.yaml
     database: [db_name]
 
 Run the following commands in the terminal window:
-
   gem install bundler
   bundle install
   ruby app.rb
